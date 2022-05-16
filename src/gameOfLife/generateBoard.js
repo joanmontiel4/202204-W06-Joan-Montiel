@@ -1,13 +1,5 @@
 // GENERATES THE GAME BOARD
-
-class Cell {
-    adjacentAlive;
-    constructor(row, column, alive) {
-        this.row = row;
-        this.column = column;
-        this.alive = alive;
-    }
-}
+import { Cell } from './classes/cell.js';
 
 export function generateBoard(numOfRows = 0, numOfColumns = 0) {
     const board = [];
