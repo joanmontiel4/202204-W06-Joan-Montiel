@@ -1,4 +1,4 @@
-import { changeCellStatus } from './changeCellStatus.js';
+import { Cell } from './classes/cell.js';
 
 export function updateCellStatus(board) {
     for (let i = 0; i < board.length; i++) {
