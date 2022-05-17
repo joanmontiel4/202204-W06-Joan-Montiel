@@ -23,7 +23,9 @@ export class gameBoard {
         for (let row = 0; row < this.numOfRows; row++) {
             aliveBoard[row] = [];
             for (let cell of this.board[row]) {
-                aliveBoard[row].push(cell.alive);
+                cell.alive === true
+                    ? aliveBoard[row].push(1)
+                    : aliveBoard[row].push(0);
             }
         }
         console.table(aliveBoard);
