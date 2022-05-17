@@ -1,18 +1,14 @@
-import { generateBoard } from './src/gameOfLife/generateBoard.js';
-import { generateAliveBoard } from './src/gameOfLife/generateAliveBoard.js';
-import { updateAdjacentAlive } from './src/gameOfLife/updateAdjacentAlive.js';
-import { numAdjacentAliveBoard } from './src/gameOfLife/numAdjacentAliveBoard.js';
-import { updateCellStatus } from './src/gameOfLife/updateCellStatus.js';
+import { gameBoard } from './src/gameOfLife/classes/board.js';
 
-const board = generateBoard(5, 5);
-const aliveBoard = generateAliveBoard(board);
-console.table(aliveBoard);
+const newBoard = new gameBoard(5, 5);
 
-updateAdjacentAlive(board);
+// function repeatCode() {
+//     newBoard.generateAliveBoard(); //HELPER METHOD
+//     newBoard.updateAdjacentAlive();
+// newBoard.numAdjacentAliveBoard(); //HELPER METHOD
+//     newBoard.updateCellStatus();
+// }
 
-numAdjacentAliveBoard(board);
-
-updateCellStatus(board);
-
-const aliveBoard2 = generateAliveBoard(board);
-console.table(aliveBoard2);
+// const intervalID = setInterval(repeatCode, 1000);
+// setInterval(repeatCode, 1000);
+// setTimeout(clearInterval(intervalID), 10000);
