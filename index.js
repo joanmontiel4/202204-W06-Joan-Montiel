@@ -11,4 +11,4 @@ function repeatCode() {
 
 const intervalID = setInterval(repeatCode, 2000);
 // setInterval(repeatCode, 1000);
-setTimeout(clearInterval, 80000, intervalID);
+setTimeout(clearInterval, 40000, intervalID);
