@@ -17,6 +17,30 @@ export class gameBoard {
             }
         }
     }
+
+    generateHTMLBoard() {
+        const boardHTMLElements = [];
+        for (let i = 0; i < this.board.length; i++) {
+            boardHTMLElements[i] = [];
+            for (let j = 0; j < this.board[0].length; j++) {
+                boardHTMLElements[i][
+                    j
+                ] = `<div class="cell" id="cell${i}${j}"></div>`;
+            }
+        }
+        return boardHTMLElements;
+    }
+
+    generateBoardString() {
+        // GENERATES DIV CONTAINERS FOR EACH CELL WITH ID="cellXY"
+        let text = '';
+        const boardHTMLElements = this.generateHTMLBoard();
+        for (let i = 0; i < this.board.length; i++) {
+            text += boardHTMLElements[i].join('');
+        }
+        return text;
+    }
+
     generateAliveBoard() {
         //HELPER FUNCTION TO BE ELIMINATED
         const aliveBoard = [];
