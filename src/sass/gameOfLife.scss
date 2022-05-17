@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    font-family: 'Oswald', sans-serif;
+    display: grid;
+}
+
+.button {
+    width: 100px;
+    height: 50px;
+    margin: 20px;
+}
+
+.cell {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    color: grey;
+    background-color: grey;
+    border-radius: 50%;
+    margin: 0;
+}
+
+// .wrapper {
+//   display: grid;
+//   grid-template-columns: 100px 100px 100px;
+//   grid-gap: 10px;
+//   background-color: #fff;
+//   color: #444;
+// }
+
+// .box {
+//   background-color: #444;
+//   color: #fff;
+//   border-radius: 5px;
+//   padding: 20px;
+//   font-size: 150%;
+// }
