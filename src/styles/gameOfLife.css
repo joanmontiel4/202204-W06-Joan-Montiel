@@ -25,10 +25,16 @@ ul {
   margin: 20px;
 }
 
+.main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
 .cell {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
+  display: block;
+  width: 50vw;
+  height: 50vw;
   color: grey;
   background-color: grey;
   border-radius: 50%;

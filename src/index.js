@@ -2,22 +2,22 @@ import { gameBoard } from './gameOfLife/classes/board.js';
 
 const newBoard = new gameBoard(10, 10);
 /////////////////   CONSOLE TEST     ////////////////////////
-// function repeatCode() {
-//     newBoard.generateAliveBoard(); //HELPER METHOD
-//     newBoard.updateAdjacentAlive();
-//     // newBoard.numAdjacentAliveBoard(); //HELPER METHOD
-//     newBoard.updateCellStatus();
-// }
+function repeatCode() {
+    newBoard.generateAliveBoard(); //HELPER METHOD
+    newBoard.updateAdjacentAlive();
+    // newBoard.numAdjacentAliveBoard(); //HELPER METHOD
+    newBoard.updateCellStatus();
+}
 
-// const intervalID = setInterval(repeatCode, 2000);
-// setTimeout(clearInterval, 10000, intervalID);
+const intervalID = setInterval(repeatCode, 2000);
+setTimeout(clearInterval, 10000, intervalID);
 ////////////////////////////////////////////////////////////
 
 // document.body.style.backgroundColor = 'red';
 
-const boardHTML = newBoard.generateBoardString();
-// console.log(boardHTML);
-document.main.innerHTML = boardHTML;
+// const boardHTML = newBoard.generateBoardString();
+// console.log(typeof boardHTML);
+// document.main.innerHTML = boardHTML;
 // document.body.style.backgroundColor = 'red';
 
 // let mainDoc = querySelector('main');
