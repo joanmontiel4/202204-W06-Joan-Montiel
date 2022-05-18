@@ -18,14 +18,26 @@ export class gameBoard {
         }
     }
 
-    generateHTMLBoard() {
+    renderHTMLBoard() {
+        //borrar estado actual de celulas 
+        document.querySelector('main').innerHTML('');
         const boardHTMLElements = [];
         for (let i = 0; i < this.board.length; i++) {
             boardHTMLElements[i] = [];
             for (let j = 0; j < this.board[0].length; j++) {
-                boardHTMLElements[i][
-                    j
-                ] = `<div class="cell" id="cell${i}${j}"></div>`;
+                // boardHTMLElements[i][j] = `<div class="cell ${this.board[i][j].alive ?? 'cell--alive'}" id="cell${i}${j}"></div>`;
+                const cellId = `cell${i}${j}`;
+                // Añadir div generado al documento
+                const currentMainContent = document.querySelector('main').innerHTML()
+                document.querySelector('main').innerHTML(currentMainContent + `<div class="cell ${this.board[i][j].alive ?? 'cell--alive'}" id="${cellId}"></div>`)
+                // Buscar div añadido al documento
+                const currentCell = document.querySelector(`#${cellId}`);
+                currentCell.addEventListener('click', () => {
+                    // Actializa estado de la célula
+                    this.board[i][j].alive = !this.board[i][j].alive;
+                    // Actualiza clases para reflejar cambio
+                    currentCell.classList.toggle('cell--alive');                    
+                })
             }
         }
         return boardHTMLElements;
@@ -38,6 +50,7 @@ export class gameBoard {
         for (let i = 0; i < this.board.length; i++) {
             text += boardHTMLElements[i].join('');
         }
+
         return text;
     }
 
