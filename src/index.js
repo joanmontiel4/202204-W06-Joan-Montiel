@@ -1,31 +1,57 @@
 import { gameBoard } from './gameOfLife/classes/board.js';
 
 const newBoard = new gameBoard(10, 10);
+// newBoard.renderHTMLBoard();
 /////////////////   CONSOLE TEST     ////////////////////////
-function repeatCode() {
-    newBoard.generateAliveBoard(); //HELPER METHOD
-    newBoard.updateAdjacentAlive();
-    // newBoard.numAdjacentAliveBoard(); //HELPER METHOD
-    newBoard.updateCellStatus();
-}
+// function repeatCode() {
+//     newBoard.generateAliveBoard(); //HELPER METHOD
+//     newBoard.updateAdjacentAlive();
+//     // newBoard.numAdjacentAliveBoard(); //HELPER METHOD
+//     newBoard.updateCellStatus();
+// }
 
-const intervalID = setInterval(repeatCode, 2000);
-setTimeout(clearInterval, 10000, intervalID);
+// const intervalID = setInterval(repeatCode, 2000);
+// setTimeout(clearInterval, 10000, intervalID);
 ////////////////////////////////////////////////////////////
 
-// document.body.style.backgroundColor = 'red';
+/////////////////  TEST gameBoard   ////////////////////////
+// function repeatCode() {
+//     newBoard.renderHTMLCells();
+//     // newBoard.updateAdjacentAlive();
+//     // newBoard.updateCellStatus();
+// }
 
-// const boardHTML = newBoard.generateBoardString();
-// console.log(typeof boardHTML);
-// document.main.innerHTML = boardHTML;
-// document.body.style.backgroundColor = 'red';
+// const intervalID = setInterval(repeatCode, 2000);
+// setTimeout(clearInterval, 10000, intervalID);
+////////////////////////////////////////////////////////////
+const numOfColumns = 10;
+const numOfRows = 10;
 
-// let mainDoc = querySelector('main');
-// mainDoc.style.backgroundColor = 'black';
-// document.body.style.backgroundColor = 'grey';
+newBoard.renderHTMLBoard();
 
-// let cellHTML = document.querySelector(".cell");
-// cellHTML.style.
+//renderHTMLBoard()
+// const main = document.querySelector('.main');
+// main.style.display = 'grid';
+// main.style.height = '100vw';
+// main.style.gridTemplateColumns = `repeat(${numOfColumns}, 1fr)`;
+// main.style.gridTemplateRows = `repeat(${numOfRows}, 1fr)`;
+// main.style.border = 'solid 1px';
+
+newBoard.renderHTMLCells();
+
+//renderHTMLCells()
+// const main = document.querySelector('.main');
+// for (let i = 0; i < 10; i++) {
+//     const newCell = document.createElement('div');
+//     newCell.classList.add('cell', 'cell--alive');
+//     newCell.setAttribute('id', `cell${i}`);
+//     // newDiv.innerHTML = `<div class="cell cell--alive" id="cell${i}"></div>`;
+//     main.appendChild(newCell);
+//     const selectedCell = document.querySelector(`#cell${i}`);
+//     selectedCell.style.width = `calc(100vw / ${numOfColumns})`;
+//     selectedCell.style.height = `calc(100vw / ${numOfColumns})`;
+//     selectedCell.style.backgroundColor = 'red';
+// }
 
 // Create our stylesheet
 

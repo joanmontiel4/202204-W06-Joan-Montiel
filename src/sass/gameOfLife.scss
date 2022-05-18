@@ -24,22 +24,28 @@ ul {
     height: 50px;
     margin: 20px;
 }
+// body {
+//     // background-color: red;
+// }
+// main {
+//     display: block;
+//     background-color: grey;
+// }
+// .main {
+//     display: grid;
+//     grid-template-columns: repeat(2, 1fr);
+//     grid-template-rows: repeat(2, 1fr);
+// }
 
-.main {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-}
-
-.cell {
-    display: block;
-    width: calc(100vw / 2);
-    height: calc(100vw / 2);
-    color: grey;
-    background-color: grey;
-    border-radius: 50%;
-    margin: 0;
-}
+// .cell {
+//     display: block;
+//     width: calc(100vw / 2);
+//     height: calc(100vw / 2);
+//     color: grey;
+//     background-color: grey;
+//     border-radius: 50%;
+//     margin: 0;
+// }
 
 // .wrapper {
 //   display: grid;

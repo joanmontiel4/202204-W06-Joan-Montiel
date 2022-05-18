@@ -19,48 +19,70 @@ export class gameBoard {
     }
 
     renderHTMLBoard() {
+        const main = document.querySelector('.main');
+        main.style.display = 'grid';
+        main.style.height = '100vw';
+        main.style.gridTemplateColumns = `repeat(${this.numOfColumns}, 1fr)`;
+        main.style.gridTemplateRows = `repeat(${this.numOfRows}, 1fr)`;
+        main.style.border = 'solid 1px';
+    }
+
+    renderHTMLCell() {
+        const cells = document.querySelectorAll('.cell');
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.width = `calc(100vw / ${this.numOfColumns})`;
+            cells[i].style.height = `calc(100vw / ${this.numOfColumns})`;
+            cells[i].style.backgroundColor = 'grey';
+            cells[i].style.borderRadius = '50%';
+        }
+        const cellsAlive = document.querySelectorAll('.cell--alive');
+        for (let i = 0; i < cellsAlive.length; i++) {
+            cellsAlive[i].style.backgroundColor = 'blue';
+        }
+    }
+
+    renderHTMLCells() {
+        const main = document.querySelector('.main');
         // Borrar estado actual de células renderizadas
-        document.querySelector('main').innerHTML('');
+        // main.innerHTML = ``; //Borra el contingut html del main
         const boardHTMLElements = [];
         for (let i = 0; i < this.board.length; i++) {
             boardHTMLElements[i] = [];
             for (let j = 0; j < this.board[0].length; j++) {
-                // boardHTMLElements[i][j] = `<div class="cell" id="cell${i}${j}"></div>`;
                 const cellId = `cell${i}${j}`;
                 // Añadir div generado al documento
-                const currentMainContent = document
-                    .querySelector('main')
-                    .innerHTML();
-                document
-                    .querySelector('main')
-                    .innerHTML(
-                        currentMainContent +
-                            `<div class="cell ${
-                                this.board[i][j].alive ?? 'cell--alive'
-                            }" id="${cellId}"></div>`
-                    );
+                const newCell = document.createElement('div');
+                newCell.classList.add('cell');
+                newCell.setAttribute('id', `${cellId}`);
+
+                // Add class cell--alive if cell is alive
+                if (this.board[i][j].alive) {
+                    newCell.classList.add('cell--alive');
+                }
+                main.appendChild(newCell);
+
                 // Seleccionar div añadido al documento
-                const currentCell = document.querySelector(`#${cellId}`);
-                currentCell.addEventListener('click', () => {
+                const selectedCell = document.querySelector(`#cell${i}${j}`);
+                selectedCell.addEventListener('click', () => {
                     // Actualiza el estado de la célula
                     this.board[i][j].alive = !this.board[i][j].alive;
                     // Actualiza la class para reflejar el cambio
-                    currentCell.classList.toggle('cell--alive');
+                    selectedCell.classList.toggle('cell--alive');
                 });
             }
         }
-        return boardHTMLElements;
+        this.renderHTMLCell();
     }
 
-    generateBoardString() {
-        // GENERATES DIV CONTAINERS FOR EACH CELL WITH ID="cellXY"
-        let text = '';
-        const boardHTMLElements = this.generateHTMLBoard();
-        for (let i = 0; i < this.board.length; i++) {
-            text += boardHTMLElements[i].join('');
-        }
-        return text;
-    }
+    // generateBoardString() {
+    //     // GENERATES DIV CONTAINERS FOR EACH CELL WITH ID="cellXY"
+    //     let text = '';
+    //     const boardHTMLElements = this.generateHTMLBoard();
+    //     for (let i = 0; i < this.board.length; i++) {
+    //         text += boardHTMLElements[i].join('');
+    //     }
+    //     return text;
+    // }
 
     generateAliveBoard() {
         //HELPER FUNCTION TO BE ELIMINATED
