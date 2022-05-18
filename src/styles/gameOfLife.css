@@ -1,0 +1,44 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  font-family: "Oswald", sans-serif;
+  display: grid;
+}
+
+.button {
+  width: 100px;
+  height: 50px;
+  margin: 20px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.cell {
+  display: block;
+  width: 50vw;
+  height: 50vw;
+  color: grey;
+  background-color: grey;
+  border-radius: 50%;
+  margin: 0;
+}
+
+/*# sourceMappingURL=gameOfLife.css.map */
