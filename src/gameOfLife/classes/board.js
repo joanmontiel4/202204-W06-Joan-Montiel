@@ -44,7 +44,7 @@ export class gameBoard {
     renderHTMLCells() {
         const main = document.querySelector('.main');
         // Borrar estado actual de células renderizadas
-        // main.innerHTML = ``; //Borra el contingut html del main
+        main.innerHTML = ``; //Borra el contingut html del main
         const boardHTMLElements = [];
         for (let i = 0; i < this.board.length; i++) {
             boardHTMLElements[i] = [];
@@ -66,6 +66,7 @@ export class gameBoard {
                 selectedCell.addEventListener('click', () => {
                     // Actualiza el estado de la célula
                     this.board[i][j].alive = !this.board[i][j].alive;
+                    this.renderHTMLCell();
                     // Actualiza la class para reflejar el cambio
                     selectedCell.classList.toggle('cell--alive');
                 });
@@ -74,15 +75,22 @@ export class gameBoard {
         this.renderHTMLCell();
     }
 
-    // generateBoardString() {
-    //     // GENERATES DIV CONTAINERS FOR EACH CELL WITH ID="cellXY"
-    //     let text = '';
-    //     const boardHTMLElements = this.generateHTMLBoard();
-    //     for (let i = 0; i < this.board.length; i++) {
-    //         text += boardHTMLElements[i].join('');
-    //     }
-    //     return text;
-    // }
+    updateAdjacentAlive() {
+        //CALLS THE CELL METHOD checkAdjacentAlive
+        for (let i = 0; i < this.board.length; i++) {
+            for (let j = 0; j < this.board[0].length; j++) {
+                this.board[i][j].checkAdjacentAlive(this.board);
+            }
+        }
+    }
+
+    updateCellStatus() {
+        for (let i = 0; i < this.board.length; i++) {
+            for (let j = 0; j < this.board[0].length; j++) {
+                this.board[i][j].changeStatus();
+            }
+        }
+    }
 
     generateAliveBoard() {
         //HELPER FUNCTION TO BE ELIMINATED
@@ -97,14 +105,6 @@ export class gameBoard {
         }
         console.table(aliveBoard);
     }
-    updateAdjacentAlive() {
-        //CALLS THE CELL METHOD checkAdjacentAlive
-        for (let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board[0].length; j++) {
-                this.board[i][j].checkAdjacentAlive(this.board);
-            }
-        }
-    }
 
     numAdjacentAliveBoard() {
         //HELPER FUNCTION TO BE ELIMINATED
@@ -116,13 +116,5 @@ export class gameBoard {
             }
         }
         console.table(adjacentAliveBoard);
-    }
-
-    updateCellStatus() {
-        for (let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board[0].length; j++) {
-                this.board[i][j].changeStatus();
-            }
-        }
     }
 }
