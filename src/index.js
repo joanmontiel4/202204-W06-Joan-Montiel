@@ -1,6 +1,6 @@
 import { gameBoard } from './gameOfLife/classes/board.js';
 
-const newBoard = new gameBoard(20, 20);
+const newBoard = new gameBoard(50, 50);
 newBoard.renderHTMLBoard();
 newBoard.renderHTMLCells();
 
@@ -10,7 +10,7 @@ function repeatCode() {
     newBoard.updateCellStatus();
 }
 
-const intervalID = setInterval(repeatCode, 2000);
+const intervalID = setInterval(repeatCode, 1000);
 setTimeout(clearInterval, 30000, intervalID);
 
 /////////////////   CONSOLE TEST     ////////////////////////
