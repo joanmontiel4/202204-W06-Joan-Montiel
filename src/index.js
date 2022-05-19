@@ -1,6 +1,6 @@
 import { gameBoard } from './gameOfLife/classes/board.js';
 
-const newBoard = new gameBoard(50, 50);
+const newBoard = new gameBoard(30, 50);
 newBoard.renderHTMLBoard();
 newBoard.renderHTMLCells();
 

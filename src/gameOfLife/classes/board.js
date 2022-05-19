@@ -21,23 +21,24 @@ export class gameBoard {
     renderHTMLBoard() {
         const main = document.querySelector('.main');
         main.style.display = 'grid';
-        main.style.height = '100vw';
+        main.style.height = '60vw';
         main.style.gridTemplateColumns = `repeat(${this.numOfColumns}, 1fr)`;
         main.style.gridTemplateRows = `repeat(${this.numOfRows}, 1fr)`;
-        main.style.border = 'solid 1px';
+        main.style.margin = '0 15px 0 15px';
     }
 
     renderHTMLCell() {
         const cells = document.querySelectorAll('.cell');
         for (let i = 0; i < cells.length; i++) {
-            cells[i].style.width = `calc(100vw / ${this.numOfColumns})`;
-            cells[i].style.height = `calc(100vw / ${this.numOfColumns})`;
-            cells[i].style.backgroundColor = 'grey';
+            cells[i].style.width = `calc(95vw / ${this.numOfColumns})`;
+            cells[i].style.height = `calc(95vw / ${this.numOfColumns})`;
+            cells[i].style.backgroundColor = 'rgb(222, 222, 222)';
             cells[i].style.borderRadius = '50%';
+            cells[i].style.cursor = 'pointer';
         }
         const cellsAlive = document.querySelectorAll('.cell--alive');
         for (let i = 0; i < cellsAlive.length; i++) {
-            cellsAlive[i].style.backgroundColor = 'blue';
+            cellsAlive[i].style.backgroundColor = 'rgb(72, 72, 72)';
         }
     }
 
