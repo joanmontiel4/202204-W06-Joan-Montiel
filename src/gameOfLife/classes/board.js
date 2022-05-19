@@ -17,6 +17,82 @@ export class gameBoard {
             }
         }
     }
+
+    renderHTMLBoard() {
+        const main = document.querySelector('.main');
+        main.style.display = 'grid';
+        main.style.height = '60vw';
+        main.style.gridTemplateColumns = `repeat(${this.numOfColumns}, 1fr)`;
+        main.style.gridTemplateRows = `repeat(${this.numOfRows}, 1fr)`;
+        main.style.margin = '0 15px 0 15px';
+    }
+
+    renderHTMLCell() {
+        const cells = document.querySelectorAll('.cell');
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.width = `calc(95vw / ${this.numOfColumns})`;
+            cells[i].style.height = `calc(95vw / ${this.numOfColumns})`;
+            cells[i].style.backgroundColor = 'rgb(222, 222, 222)';
+            cells[i].style.borderRadius = '50%';
+            cells[i].style.cursor = 'pointer';
+        }
+        const cellsAlive = document.querySelectorAll('.cell--alive');
+        for (let i = 0; i < cellsAlive.length; i++) {
+            cellsAlive[i].style.backgroundColor = 'rgb(72, 72, 72)';
+        }
+    }
+
+    renderHTMLCells() {
+        const main = document.querySelector('.main');
+        // Borrar estado actual de células renderizadas
+        main.innerHTML = ``; //Borra el contingut html del main
+        const boardHTMLElements = [];
+        for (let i = 0; i < this.board.length; i++) {
+            boardHTMLElements[i] = [];
+            for (let j = 0; j < this.board[0].length; j++) {
+                const cellId = `cell${i}${j}`;
+                // Añadir div generado al documento
+                const newCell = document.createElement('div');
+                newCell.classList.add('cell');
+                newCell.setAttribute('id', `${cellId}`);
+
+                // Add class cell--alive if cell is alive
+                if (this.board[i][j].alive) {
+                    newCell.classList.add('cell--alive');
+                }
+                main.appendChild(newCell);
+
+                // Seleccionar div añadido al documento
+                const selectedCell = document.querySelector(`#cell${i}${j}`);
+                selectedCell.addEventListener('click', () => {
+                    // Actualiza el estado de la célula
+                    this.board[i][j].alive = !this.board[i][j].alive;
+                    this.renderHTMLCell();
+                    // Actualiza la class para reflejar el cambio
+                    selectedCell.classList.toggle('cell--alive');
+                });
+            }
+        }
+        this.renderHTMLCell();
+    }
+
+    updateAdjacentAlive() {
+        //CALLS THE CELL METHOD checkAdjacentAlive
+        for (let i = 0; i < this.board.length; i++) {
+            for (let j = 0; j < this.board[0].length; j++) {
+                this.board[i][j].checkAdjacentAlive(this.board);
+            }
+        }
+    }
+
+    updateCellStatus() {
+        for (let i = 0; i < this.board.length; i++) {
+            for (let j = 0; j < this.board[0].length; j++) {
+                this.board[i][j].changeStatus();
+            }
+        }
+    }
+
     generateAliveBoard() {
         //HELPER FUNCTION TO BE ELIMINATED
         const aliveBoard = [];
@@ -30,14 +106,6 @@ export class gameBoard {
         }
         console.table(aliveBoard);
     }
-    updateAdjacentAlive() {
-        //CALLS THE CELL METHOD checkAdjacentAlive
-        for (let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board[0].length; j++) {
-                this.board[i][j].checkAdjacentAlive(this.board);
-            }
-        }
-    }
 
     numAdjacentAliveBoard() {
         //HELPER FUNCTION TO BE ELIMINATED
@@ -49,13 +117,5 @@ export class gameBoard {
             }
         }
         console.table(adjacentAliveBoard);
-    }
-
-    updateCellStatus() {
-        for (let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board[0].length; j++) {
-                this.board[i][j].changeStatus();
-            }
-        }
     }
 }
