@@ -10,8 +10,16 @@ function repeatCode() {
     newBoard.updateCellStatus();
 }
 
-const intervalID = setInterval(repeatCode, 1000);
-setTimeout(clearInterval, 30000, intervalID);
+const startButton = document.querySelector('#start-button');
+let intervalId;
+startButton.addEventListener('click', () => {
+    intervalId = setInterval(repeatCode, 1000);
+});
+
+const stopButton = document.querySelector('#stop-button');
+stopButton.addEventListener('click', () => {
+    clearInterval(intervalId);
+});
 
 /////////////////   CONSOLE TEST     ////////////////////////
 // function repeatCode() {
