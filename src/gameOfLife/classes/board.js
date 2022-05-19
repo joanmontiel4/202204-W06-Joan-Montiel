@@ -9,13 +9,6 @@ export class gameBoard {
         for (let i = 0; i < numOfRows; i++) {
             this.board[i] = [];
             for (let j = 0; j < numOfColumns; j++) {
-                // INITIALIZING WITH A ROW OF ALIVE CELLS
-                // if (i === 1) {
-                //     this.board[i].push(new Cell(i, j, true));
-                // } else {
-                //     this.board[i].push(new Cell(i, j, false));
-                // }
-                /////////////////////////////////////////
                 this.board[i].push(new Cell(i, j, false));
             }
         }
@@ -29,31 +22,32 @@ export class gameBoard {
         main.style.margin = '0 15px 0 15px';
     }
 
-    renderHTMLCell() {
+    renderCell() {
         const cells = document.querySelectorAll('.cell');
-        for (let i = 0; i < cells.length; i++) {
-            cells[i].style.width = `calc(95vw / ${this.numOfColumns})`;
-            cells[i].style.height = `calc(95vw / ${this.numOfColumns})`;
-            cells[i].style.backgroundColor = 'rgb(222, 222, 222)';
-            cells[i].style.borderRadius = '50%';
-            cells[i].style.cursor = 'pointer';
-        }
+        cells.forEach((cell) => {
+            cell.style.width = `calc(95vw / ${this.numOfColumns})`;
+            cell.style.height = `calc(95vw / ${this.numOfColumns})`;
+            cell.style.backgroundColor = 'rgb(222, 222, 222)';
+            cell.style.borderRadius = '50%';
+            cell.style.cursor = 'pointer';
+        });
+    }
+
+    renderCellAlive() {
         const cellsAlive = document.querySelectorAll('.cell--alive');
-        for (let i = 0; i < cellsAlive.length; i++) {
-            cellsAlive[i].style.backgroundColor = 'rgb(72, 72, 72)';
-        }
+        cellsAlive.forEach((cellAlive) => {
+            cellAlive.style.backgroundColor = 'rgb(72, 72, 72)';
+        });
     }
 
     renderHTMLCells() {
         const main = document.querySelector('.main');
         // Borrar estado actual de células renderizadas
         main.innerHTML = ``; //Borra el contingut html del main
-        const boardHTMLElements = [];
         for (let i = 0; i < this.board.length; i++) {
-            boardHTMLElements[i] = [];
             for (let j = 0; j < this.board[0].length; j++) {
                 const cellId = `cell${i}${j}`;
-                // Añadir div generado al documento
+                // Afegir div generat al document
                 const newCell = document.createElement('div');
                 newCell.classList.add('cell');
                 newCell.setAttribute('id', `${cellId}`);
@@ -65,18 +59,18 @@ export class gameBoard {
                 main.appendChild(newCell);
             }
         }
-        this.renderHTMLCell();
+        this.renderCell();
+        this.renderCellAlive();
     }
 
     listenCells() {
-        // Seleccionar todas las celdas
         for (let i = 0; i < this.board.length; i++) {
-            //this.board.length
             for (let j = 0; j < this.board[0].length; j++) {
                 const cell = document.querySelector(`#cell${i}${j}`);
                 cell.addEventListener('click', () => {
                     // Actualiza el estado de la célula
                     this.board[i][j].alive = !this.board[i][j].alive;
+                    console.log(this.board[i][j].alive, `cell${i}${j}`);
                     // Actualiza la class para reflejar el cambio
                     cell.classList.toggle('cell--alive');
                     // Llama a la función que cambia el color de la celda
@@ -95,19 +89,19 @@ export class gameBoard {
 
     updateAdjacentAlive() {
         //CALLS THE CELL METHOD checkAdjacentAlive
-        for (let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board[0].length; j++) {
-                this.board[i][j].checkAdjacentAlive(this.board);
-            }
-        }
+        this.board.forEach((cellArray) => {
+            cellArray.forEach((cell) => {
+                cell.checkAdjacentAlive(this.board);
+            });
+        });
     }
 
     updateCellStatus() {
-        for (let i = 0; i < this.board.length; i++) {
-            for (let j = 0; j < this.board[0].length; j++) {
-                this.board[i][j].changeStatus();
-            }
-        }
+        this.board.forEach((cellArray) => {
+            cellArray.forEach((cell) => {
+                cell.changeStatus();
+            });
+        });
     }
 
     generateAliveBoard() {

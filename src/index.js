@@ -15,7 +15,7 @@ function repeatCode() {
 const startButton = document.querySelector('#start-button');
 let intervalId;
 startButton.addEventListener('click', () => {
-    intervalId = setInterval(repeatCode, 1000);
+    intervalId = setInterval(repeatCode, 500);
 });
 
 const stopButton = document.querySelector('#stop-button');
