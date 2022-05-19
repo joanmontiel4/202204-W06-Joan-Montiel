@@ -3,9 +3,11 @@ import { gameBoard } from './gameOfLife/classes/board.js';
 const newBoard = new gameBoard(30, 50);
 newBoard.renderHTMLBoard();
 newBoard.renderHTMLCells();
+newBoard.listenCells();
 
 function repeatCode() {
     newBoard.renderHTMLCells();
+    newBoard.listenCells();
     newBoard.updateAdjacentAlive();
     newBoard.updateCellStatus();
 }

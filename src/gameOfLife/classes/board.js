@@ -9,11 +9,14 @@ export class gameBoard {
         for (let i = 0; i < numOfRows; i++) {
             this.board[i] = [];
             for (let j = 0; j < numOfColumns; j++) {
-                if (i === 1) {
-                    this.board[i].push(new Cell(i, j, true));
-                } else {
-                    this.board[i].push(new Cell(i, j, false));
-                }
+                // INITIALIZING WITH A ROW OF ALIVE CELLS
+                // if (i === 1) {
+                //     this.board[i].push(new Cell(i, j, true));
+                // } else {
+                //     this.board[i].push(new Cell(i, j, false));
+                // }
+                /////////////////////////////////////////
+                this.board[i].push(new Cell(i, j, false));
             }
         }
     }
@@ -21,7 +24,6 @@ export class gameBoard {
     renderHTMLBoard() {
         const main = document.querySelector('.main');
         main.style.display = 'grid';
-        main.style.height = '60vw';
         main.style.gridTemplateColumns = `repeat(${this.numOfColumns}, 1fr)`;
         main.style.gridTemplateRows = `repeat(${this.numOfRows}, 1fr)`;
         main.style.margin = '0 15px 0 15px';
@@ -61,19 +63,34 @@ export class gameBoard {
                     newCell.classList.add('cell--alive');
                 }
                 main.appendChild(newCell);
-
-                // Seleccionar div añadido al documento
-                const selectedCell = document.querySelector(`#cell${i}${j}`);
-                selectedCell.addEventListener('click', () => {
-                    // Actualiza el estado de la célula
-                    this.board[i][j].alive = !this.board[i][j].alive;
-                    this.renderHTMLCell();
-                    // Actualiza la class para reflejar el cambio
-                    selectedCell.classList.toggle('cell--alive');
-                });
             }
         }
         this.renderHTMLCell();
+    }
+
+    listenCells() {
+        // Seleccionar todas las celdas
+        for (let i = 0; i < this.board.length; i++) {
+            //this.board.length
+            for (let j = 0; j < this.board[0].length; j++) {
+                const cell = document.querySelector(`#cell${i}${j}`);
+                cell.addEventListener('click', () => {
+                    // Actualiza el estado de la célula
+                    this.board[i][j].alive = !this.board[i][j].alive;
+                    // Actualiza la class para reflejar el cambio
+                    cell.classList.toggle('cell--alive');
+                    // Llama a la función que cambia el color de la celda
+                    this.renderSingleCell(i, j);
+                });
+            }
+        }
+    }
+
+    renderSingleCell(row, column) {
+        const cell = document.querySelector(`#cell${row}${column}`);
+        this.board[row][column].alive === true
+            ? (cell.style.backgroundColor = 'rgb(72, 72, 72)')
+            : (cell.style.backgroundColor = 'rgb(222, 222, 222)');
     }
 
     updateAdjacentAlive() {
